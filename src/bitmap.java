@@ -17,10 +17,11 @@ public class bitmap {
         setI(56,bytes);
         setI(56,bytes);
         setI(56,bytes);
-
         get(bytes);
+        System.out.println(contain(101,bytes));
 
     }
+    //设置某个数，在数组相应位进行改变，比如43，需要在数组的第6个元素的第4个bit位置1，表示43
     public static void setI(int index,byte[] bytes)
     {
         int count=index/8;
@@ -29,6 +30,7 @@ public class bitmap {
         b=(byte)(b<<(byteindex));
         bytes[count]=(byte)(bytes[count]|b);
     }
+    //打印数组中包含的所有的数字，依次遍历数组
     public static void get(byte[] bytes)
     {
         for (int i=0;i<bytes.length;i++)
@@ -44,5 +46,19 @@ public class bitmap {
                 }
             }
         }
+    }
+    //判断bitmap 中是否包含num
+    public static boolean contain(int num,byte[] bytes)
+    {
+        int bytes_index=num/8;
+        int bit_index=num%8;
+        byte b=(byte)(bytes[bytes_index]&(1<<bit_index));
+        if(b==0)
+        {
+            return false;
+        }
+        return true;
+
+
     }
 }
